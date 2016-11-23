@@ -1,0 +1,1 @@
+%~dp0/../../common/tools/proton/sample/tools/Python33/python.exe exportcfg.py

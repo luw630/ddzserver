@@ -1,0 +1,43 @@
+---------------------------------------------------
+--平台索引
+platforms={
+	[1]="juzhong",  --平台号1表示聚众互动
+	[100]="common", --通用
+}
+
+common={
+	[1000]={
+		playerdbinit = {
+			file="../config/business/playerdbinitdatacfg",
+		},
+		mailcfg = {
+			file="../config/business/mailcfg",
+		},
+		globalvarcfg = {
+            file="../config/business/globalvarcfg.lua",
+        },
+	}
+}
+
+juzhong={
+	[1] = {
+		rechargecfg = {
+			file = "../config/business/ios_rechargescfg.lua",
+		},
+	},
+	[2] = {
+		rechargecfg = {
+			file = "../config/business/android_rechargescfg.lua",
+		},
+	}
+
+}
+---------------------------------------------------------------------------
+--登陆验证用key
+authkey="keeshhskkebdghfdjfgfjdgdgdfjhfdgfgfhggg"
+--七牛云存储key
+qiniu_access_key="1l8HrAh5m2bE1L5sf37zHJqpXaWrKsjAIBu9CkQt"
+qiniu_secret_key="YdNgjrirAF7d-XMnu3HZvjGzc_U11ODdCIL480Q2"
+----------------------------------------------------------------------------
+--agent心跳时间超时时间， 单位s
+agent_heart_timeout=3600

@@ -1,0 +1,681 @@
+// See README.txt for information and build instructions.
+// syntax = "proto2";
+// 通知消息的后缀用Ntc,请求消息Req,响应消息Res
+enum EMsgType {
+    EMSGTYPE_UNKNOWN = 0;
+    EMSGTYPE_REQUEST = 1;
+    EMSGTYPE_RESPONSE = 2;
+    EMSGTYPE_NOTICE = 3;
+}
+
+message ClientMsgHead {
+  optional int32 msgtype = 1;
+  optional string msgname = 2;    
+  optional string  svr_id = 3;
+  optional int32 service_address = 4; 	
+}
+
+message Version {
+  optional int32  platform = 1; //client 平台id(属于哪家公司发行)
+  optional int32  channel = 2;  //client 渠道id(发行公司的发行渠道)
+  optional string version = 3;  //client 版本号
+  optional int32  authtype = 4; //client 账号类型
+  optional int32  regfrom = 5;  //描述从哪里注册过来的
+}
+
+message GateSvrItem {
+	optional string ip = 1;
+	optional int32 port = 2;
+	optional int32 updatetime = 3;
+	optional int32 onlinenum = 4;
+}
+
+message PlayerBaseinfo {
+	optional int32 rid = 1;
+	optional string rolename = 2; //昵称
+    optional string logo = 3;  //logo
+    optional string phone = 4; //手机号
+    optional int32	 totalgamenum = 5; //总局数
+    optional int32  winnum = 6;   //胜场数
+    optional int32  sex = 7;    //性别
+	optional int32	coins = 8;  //金币
+	optional int32  diamonds = 9; // 钻石
+	optional int32  highwininseries = 10; //最大连胜局数
+	optional int32  maxcoinnum = 11; // 最大资产
+}
+
+message TableStateItem {
+	optional int32 id = 1;    //table id
+	optional int32 state = 2; //table state
+	optional string name = 3; //桌子名字
+	optional int32 room_type = 4; //房间类型
+	optional int32 game_type = 5; //游戏类型
+	optional int32 max_player_num = 6;   //房间支持的最大人数
+	optional int32 cur_player_num = 7;   //状态服务器
+	optional int32 retain_to_time =8;   //桌子保留到的时间(linux时间擢)
+	optional int32 create_user_rid = 9; //创建者rid
+	optional string create_user_rolename = 10; //创建者姓名
+	optional int32 create_time = 11;      //桌子的创建时间
+	optional string create_table_id = 12; //创建桌子的索引id	
+	optional string roomsvr_id = 13;      //房间服务器id
+	optional int32 roomsvr_table_address = 14; //桌子table的地址
+	optional int32 action_timeout = 15;       //玩家操作限时
+	optional int32 action_timeout_count = 16; //玩家可操作超时次数	
+	optional string create_user_logo = 17;
+
+	optional int32 min_carry_coin = 18;
+	optional int32 max_carry_coin = 19;
+	optional int32 base_coin = 20;                //基础分
+    optional int32 common_times  = 21;            //牌级
+
+	optional int32 totalplayernum = 22;       //在场次列表中显示在线人数
+	optional int32 distribute_playernum = 23;
+}
+
+message SeatInfo {
+	optional int32 rid = 1;
+	optional int32 index = 2;
+	optional int32 state = 3;
+	optional int32 is_tuoguan = 4; //1表示是 0表示否
+	optional int32 coin = 5;       //金币
+	optional int32 jdztag = 6;     //记录叫地主标识(不叫地址值为0, 1表示叫地主, 2表示抢地主)
+	optional int32 isdz = 7;       //是否是地主
+	optional int32 ready_to_time = 8; //玩家准备到期时间
+	optional int32 cardsnum = 9; // 玩家手牌数量
+}
+
+message TablePlayerInfo {
+	optional int32 rid = 1;
+	optional string rolename = 2;
+	optional string logo = 3;
+	optional int32 	sex = 4;
+	optional int32	totalgamenum = 5; //总局数
+    optional int32  winnum = 6;   //胜场数
+	optional int32	coins = 7;  //金币
+	optional int32  diamonds = 8; // 钻石
+	optional int32  highwininseries = 9; //最大连胜局数
+	optional int32  maxcoinnum = 10; // 最大资产
+}
+
+message GameInfo {
+	optional int32 id = 1;    //table id
+	optional int32 state = 2; //table state
+	optional string name = 3; //桌子名字
+	optional int32 room_type = 4; //房间类型
+	optional int32 game_type = 5; //游戏类型
+	optional int32 max_player_num = 6;   //房间支持的最大人数
+	optional int32 cur_player_num = 7;   //状态服务器
+	optional int32 retain_to_time = 8;   //桌子保留到的时间(linux时间擢)
+	optional int32 create_user_rid = 9; //创建者rid
+	optional string create_user_rolename = 10; //创建者姓名
+	optional int32 create_time = 11;      //桌子的创建时间
+	optional string create_table_id = 12; //创建桌子的索引id	
+	optional string roomsvr_id = 13;      //房间服务器id
+	optional int32 roomsvr_table_address = 14; //桌子table的地址
+	optional int32 action_timeout = 15;       //玩家操作限时
+	optional int32 action_timeout_count = 16; //玩家可操作超时次数	
+	optional string create_user_logo = 17;
+	optional int32 min_carry_coin = 18;
+	optional int32 max_carry_coin = 19;
+	optional int32 base_coin = 20;            //基础分
+    optional int32 common_times  = 21;        //牌级
+    optional int32 all_times = 22;
+
+	optional int32 action_seat_index = 23;    //当前操作玩家的座位号
+	optional int32 action_to_time = 24;       //当前操作玩家的到期时间
+	optional int32 action_type = 25;
+
+	optional int32 dz_seat_index = 26;
+	//下面两个结构按数组下标一一对应
+	repeated SeatInfo seats = 27; //座位
+	repeated TablePlayerInfo tableplayerinfos = 28;
+
+}
+
+message AwardItem {
+	optional int32 id = 1;  //物品id
+	optional int32 num = 2; //物品数量
+}
+////////////////////////request/////////////////////////
+//请求登陆loginsvrd
+message LoginReq {
+	optional Version version = 1;
+	optional string deviceinfo = 2; //设备信息
+	optional int32 uid = 3;
+	optional int32 uidtype = 4; //登录账号类型 如: 游客: guest 手机: phone 微信: weixin等
+	optional string thirdtoken = 5; 
+	optional string username = 6;	
+}
+//响应登陆loginsvrd
+message LoginRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	optional int32 uid = 3;
+	optional int32 rid = 4;
+	optional string logintoken = 5; //登录服务器返回的登录token
+	optional int32 expiretime = 6;  //过期时间（绝对时间）单位s
+	repeated GateSvrItem gatesvrs = 7;//gate服务器地址列表 
+}
+
+//心跳包请求
+message HeartReq {
+	optional Version version = 1;	
+}
+//心跳包响应
+message HeartRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	optional int32 servertime = 3;  //服务器时间
+}
+
+//请求七牛上传token
+message QiniuUploadReq {
+	optional Version version = 1;
+	optional string uploadlogo = 2;	
+}
+
+//响应七牛上传token
+message QiniuUploadRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	optional string uploadtoken = 3;	
+}
+
+//请求进入游戏
+message EnterGameReq {
+	optional Version version = 1;
+	optional string device_info = 2; //设备信息
+	optional int32 uid = 3;
+	optional int32 rid = 4;
+	optional int32 expiretime = 5;
+	optional string logintoken = 6; 
+}
+
+//响应进入游戏
+message EnterGameRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	optional int32 isreauth = 3; //是否需要重新认证，断线重连时根据token是否过期告诉client是否需要重新登录认证, 2表示false、1表示true
+	optional int32 servertime = 4; //同步服务器时间
+	optional PlayerBaseinfo baseinfo = 5; //下面数据用于判断玩家是否需要牌桌断线重连
+	optional string ip = 6;   //gatesvrd的ip
+	optional int32 port = 7;  //gatesvrd的port
+	optional string roomsvr_id = 8; //房间服务器id
+	optional int32  roomsvr_table_address = 9; //桌子的服务器地址 
+}
+
+//请求玩家基本信息
+message PlayerBaseinfoReq {
+	optional Version version = 1;
+	optional int32 rid = 2;
+}
+
+//响应玩家的基本信息
+message PlayerBaseinfoRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	optional PlayerBaseinfo baseinfo = 3; //
+}
+
+//请求更新玩家信息
+message UpdateinfoReq {
+	optional Version version = 1;
+	optional string rolename = 2; //昵称
+    optional string logo = 3;  //logo
+    optional string phone = 4; //手机号
+    optional int32  sex = 5;   //性别
+}
+
+//响应更新玩家信息
+message UpdateinfoRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	optional string rolename = 3; //昵称
+    optional string logo = 4;  //logo
+    optional string phone = 5; //手机号
+    optional int32  sex = 6;   //性别
+}
+
+//请求创建朋友桌
+message CreateFriendTableReq {
+	optional Version version = 1;
+	optional int32 action_timeout = 2;       //玩家出牌时间
+	optional int32 retain_time = 3;          //朋友桌保留时间单位s
+	optional int32 base_coin = 4;            //基础分
+	optional int32 iscontrol = 5;            //是否控制申请 1表示是 2表示否
+}
+
+//响应创建朋友桌
+message CreateFriendTableRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	optional string create_table_id = 3; //朋友桌索引号
+}
+
+//根据创建桌子号获取桌子状态请求
+message GetTableStateByCreateIdReq {
+	optional Version version = 1;
+	optional string create_table_id = 2; 
+}
+
+//根据创建桌子号获取桌子状态响应
+message GetTableStateByCreateIdRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	optional TableStateItem tablestate = 3; //桌子状态
+}
+
+//取得创建桌列表请求
+message GetFriendTableListReq {
+	optional Version version = 1;
+}
+
+//取得创建桌列表响应
+message GetFriendTableListRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述	
+	repeated TableStateItem tablelist = 3; //桌子状态列表
+}
+
+//取得游戏类型列表
+message GetGameRoomsReq {
+	optional Version version = 1;
+	optional int32 room_type = 2;//房间类型(1经典场)
+}
+
+//响应游戏类型列表
+message GetGameRoomsRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	repeated TableStateItem tablestates = 3; //桌子状态列表
+}
+
+//快速开始请求
+message QuickStartReq {
+	optional Version version = 1;
+	optional int32 room_type = 2; //指定快速开始进入指定场次
+	optional int32 id = 3;	//指定上一次所在的桌号主要用于快速换桌,如果不需要换桌逻辑填0
+	optional int32 game_type = 4; //游戏类型
+}
+
+//响应快速开始
+message QuickStartRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	optional int32 id = 3;
+	optional string roomsvr_id = 4; //房间服务器id
+	optional int32  roomsvr_table_address = 5; //桌子的服务器地址 
+}
+
+//请求进入桌子
+message EnterTableReq {
+	optional Version version = 1;
+	optional int32 id = 2;
+	optional string roomsvr_id = 3; //房间服务器id
+	optional int32  roomsvr_table_address = 4; //桌子的服务器地址 
+}
+
+//响应进入桌子
+message EnterTableRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述	
+	optional GameInfo gameinfo = 3;
+}
+
+//请求坐入桌子
+message SitdownTableReq {
+	optional Version version = 1;
+	optional int32 id = 2;
+	optional string roomsvr_id = 3; //房间服务器id
+	optional int32  roomsvr_table_address = 4; //桌子的服务器地址
+	optional int32  roomsvr_seat_index = 5; //指定桌位号
+}
+
+//响应坐入桌子
+message SitdownTableRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述	
+}
+
+//请求从桌子站起
+message StandupTableReq {
+	optional Version version = 1;
+	optional int32 id = 2;
+	optional string roomsvr_id = 3; //房间服务器id
+	optional int32  roomsvr_table_address = 4; //桌子的服务器地址
+}
+
+//响应从桌子站起
+message StandupTableRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述		
+}
+
+//请求离开桌子
+message LeaveTableReq {
+	optional Version version = 1;	
+	optional int32 id = 2;
+	optional string roomsvr_id = 3; //房间服务器id
+	optional int32  roomsvr_table_address = 4; //桌子的服务器地址
+}
+
+//响应离开桌子
+message LeaveTableRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述			
+}
+
+//请求断线重连进入桌子
+message ReenterTableReq {
+	optional Version version = 1;
+	optional string roomsvr_id = 2; //房间服务器id
+	optional int32  roomsvr_table_address = 3; //桌子的服务器地址 
+}
+
+//响应断线重连进入桌子
+message ReenterTableRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述	
+	optional GameInfo gameinfo = 3;
+}
+//桌主请求开始游戏
+message StartGameReq {
+	optional Version version = 1;	
+	optional int32 id = 2;
+	optional string roomsvr_id = 3; //房间服务器id
+	optional int32  roomsvr_table_address = 4; //桌子的服务器地址	
+}
+
+//响应桌主开始游戏
+message StartGameRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述		
+}
+
+//玩家请求操作
+message DoactionReq {
+	optional Version version = 1;	
+	optional int32 id = 2;
+	optional string roomsvr_id = 3; //房间服务器id
+	optional int32  roomsvr_table_address = 4; //桌子的服务器地址	
+	optional int32  action_type = 5;
+	repeated int32  cards = 6; //牌
+	optional int32 call_times = 7; //玩家叫的分
+}
+
+//响应玩家请求操作
+message DoactionRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述		
+}
+
+//玩家请求准备
+message GameReadyReq {
+	optional Version version = 1;
+	optional int32 id = 2;
+	optional string roomsvr_id = 3; //房间服务器id
+	optional int32  roomsvr_table_address = 4; //桌子的服务器地址
+}
+//响应玩家请求准备
+message GameReadyRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+}
+
+//请求玩家战绩信息
+message PlayerGameRecordinfoReq {
+	optional Version version = 1;
+	optional int32 rid = 2;
+	optional int32 id = 3;  //最新一条战绩的自增id
+	optional int32 limit = 4; // 要查询的战绩条数
+}
+
+//每个玩家在朋友桌存在期间的记录
+message playerRecordinfo {
+	optional int32 rid = 1;
+	optional int32 currencyid = 2; //货币id，金币为1
+	optional int32 balancenum = 3; //输赢的数量，+为赢，-为输
+	optional string rolename = 4; // 玩家名字
+}
+message PlayerGameRecordinfo {
+	optional int32 id = 1;  //自增id
+	optional int32 table_id = 2; //桌子id
+	optional int32 table_create_time = 3; //桌子创建时间
+	optional int32 tablecreater_rid = 4; //桌子创建者的rid
+	optional int32 entercosts = 5; // 报名费
+	repeated playerRecordinfo recordinfos = 6;
+}
+
+//响应玩家战绩信息
+message PlayerGameRecordinfoRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; //错误描述
+	repeated PlayerGameRecordinfo records = 3; // 
+}
+
+//请求玩家的邮件信息
+message GetMailsReq {
+	optional Version version = 1;
+	optional int32 create_time = 2;
+}
+
+
+message MailItem {
+	optional string mail_key = 1;
+	optional int32 	rid = 2;
+	optional int32  create_time = 3;
+	optional string content = 4;
+	optional int32  isattach = 5;
+}
+
+//响应玩家的邮件信息
+message GetMailsRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; // 错误描述 
+	repeated MailItem mailitems = 3; // 玩家邮件列表
+}
+
+//玩家请求领取邮件附件
+message GetmailItemsReq {
+	optional Version version = 1;
+	optional string mail_key = 2;
+}
+
+//响应玩家请求领取邮件附件
+message GetmailItemsRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; // 错误描述 
+	optional string mail_key = 3; //
+	optional string resultdes = 4; // 得到物品的json串
+}
+
+// 玩家请求删除邮件
+message DeleteMailReq {
+	optional Version version = 1;
+	optional string mail_key = 2;
+}
+
+// 响应玩家请求删除邮件
+message DeleteMailRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; // 错误描述 
+	optional string mail_key = 3; //
+}
+
+// 玩家请求发送聊天信息
+message SendMessageReq {
+	optional Version version = 1;
+	optional string messages = 2; //json 串
+	optional int32 chat_type = 3; //聊天类型(备用)
+}
+
+// 玩家发送聊天信息回应
+message SendMessageRes {
+	optional int32 errcode = 1;
+	optional string errcodedes = 2;
+}
+
+// 请求充值
+message RechargeReq {
+	optional Version version = 1;
+	optional int32 good_id = 2;        //商品id
+	optional int32 pay_type = 3;       //支付类型
+	optional string option_data = 4;   //附加数据
+	optional string ios_pay_order = 5; //苹果预付单号
+}
+
+// 响应充值
+message RechargeRes {
+	optional int32 errcode = 1; //错误原因 0表示成功
+	optional string errcodedes = 2; // 错误描述 
+	optional string order_id = 3;   // 订单号
+	optional int32  pay_type = 4;	// 支付类型
+	optional int32  good_id = 5;      // 商品id
+	optional string option_data = 6;  // 订单附加数据			
+	optional string ios_pay_order = 7;// 苹果预付单号
+}
+message ConfBase {
+	optional int32 changetime = 1;
+	optional string confname = 2;
+	optional string confcontent = 3; //json
+}
+//客户端请求下载配置文件
+message DownloadCfgReq {
+	optional Version version = 1;
+	repeated ConfBase resconfinfos = 2;
+}
+//响应客户端请求下载配置文件
+message DownloadCfgRes {
+	optional int32 errcode = 1;
+	optional string errcodedes = 2;
+	repeated ConfBase reqconfinfos = 3;
+}
+////////////////////notice/////////////////////
+//通知在其他设备上登陆
+message RepeatNtc {
+	optional int32 rid = 1;
+}
+//通知桌子有玩家坐下
+message SitdownTableNtc {
+	optional int32 rid = 1;
+	optional SeatInfo seatinfo = 2; //座位信息
+	optional TablePlayerInfo tableplayerinfo = 3;
+}
+
+//通知桌子有玩家站起
+message StandupTableNtc {
+	optional int32 rid = 1;
+	optional int32 roomsvr_seat_index = 2;
+	optional int32 state = 3;
+	optional int32 reason = 4;
+}
+
+//通知玩家操作
+message DoactionNtc {
+	optional int32 rid = 1;
+	optional int32 roomsvr_seat_index = 2;
+	optional int32 action_to_time = 3;  //玩家操作到期时间
+	optional int32 action_type = 4;     //操作类型 
+}
+
+//通知玩家开始游戏
+message GameStartNtc {
+	optional GameInfo gameinfo = 1;
+}
+
+//通知玩家操作结果
+message DoactionResultNtc {
+	optional int32 rid = 1;
+	optional int32 roomsvr_seat_index = 2;
+	optional int32 action_type = 3;
+	repeated int32 cards = 4; //牌
+	optional int32 call_times = 5; // 玩家叫分
+}
+
+//通知发牌
+message DealCardsNtc {
+	optional int32 rid = 1;
+	optional int32 roomsvr_seat_index = 2;
+	repeated int32 cards = 3; //牌	
+}
+
+//通知玩家准备倒计时
+message DoReadyNtc {
+	optional int32 rid = 1;
+	optional int32 roomsvr_seat_index = 2;
+	optional int32 ready_to_time = 3;  //玩家准备到期时间 
+}
+
+message GameReadyResultNtc {
+	optional int32 rid = 1;
+	optional int32 roomsvr_seat_index = 2;
+	optional int32 isready = 3;
+	//optional SeatInfo seatinfo = 4; //座位信息
+}
+
+//给玩家发底牌
+message DealCardsEndNtc {
+	optional int32 rid = 1;  //
+	repeated int32 cards = 2; // 玩家底牌
+}
+
+//座位上每个玩家的结算信息
+message PlayerInfoInGameEnd {
+    optional int32 rid = 1; //玩家rid
+    optional string rolename = 2; //玩家名字
+    optional int32 allcoins = 3; //当前玩家总金币
+    optional int32 getcoins = 4; //本局比赛获得的金币
+    optional int32 isdz = 5; //是否是地主(0农民,1地主)
+    optional int32 iswin = 6; //是否胜利(1胜利，0失败)
+	optional int32 seatindex = 7; //
+}
+
+//一局游戏结束,推送游戏结果给玩家
+message GameEndResultNtc {
+    optional int32 basecoins = 1; // 基础金币数
+    optional int32 times = 2; // 倍数
+    repeated PlayerInfoInGameEnd playerinfos = 3; //座位上每个玩家的结算信息
+	optional int32 ischuntian = 4; //是否是春天
+}
+
+//推送玩家手牌数量和翻倍数
+message PushhandsNumNtc {
+	optional int32 basecoins = 1;
+	optional int32 times = 2;
+	repeated SeatInfo seats = 3;
+}
+message CardsPuts {
+	optional int32 rid = 1;
+	repeated int32 putcards = 2;
+}
+//
+message ReenterTableNtc {
+	repeated int32 handcards = 1; //手牌
+	repeated int32 dealcards = 2; //
+	repeated CardsPuts cardsput = 3; //断线重连时,各个玩家的出牌情况
+	optional int32 action_type = 4;
+	optional int32 action_to_time = 5;
+	optional int32 action_seat_index = 6;
+}
+
+//广播玩家发送的消息
+message PlayerTableMessageNtc {
+	optional int32 rid = 1;
+	optional int32 seat_index = 2;
+	optional string messages = 3; //json 串
+	optional int32 chat_type = 4; //聊天类型(备用)
+}
+//通知发货
+message DeliverGoodsNtc {
+	optional string order_id = 1;    //订单号
+	optional string option_data = 2; //附加数据
+	repeated AwardItem awards = 3;   //奖励物品
+}
+//玩家货币,胜局数改变时通知客户端
+message PlayerBaseInfoNtc {
+	optional PlayerBaseinfo baseinfo = 1; //
+}
+
+message PlayerLevelTableNtc {
+	optional int32 rid = 1;
+}

@@ -1,0 +1,7 @@
+logindbsvrd 8009
+datadbsvrd 8008
+tablestatesvrd 8010
+loginsvrd 8001
+gatesvrd 8000
+roomsvrd 8011
+logsvrd 8012

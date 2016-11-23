@@ -1,0 +1,56 @@
+info = {
+	rid = 0,    ---ID号
+	username = "", --用户名
+	rolename = "_guest", --用户昵称
+	logo = "1",     --头像
+	phone = "",     -- 绑定电话
+	sex = 0,        --性别1 男, 2 女
+}
+
+playgame = {
+	rid = 0,
+	totalgamenum = 0, ---总局数
+    winnum = 0, ---胜场数
+    wininseriesnum = 0, ---连胜记录
+    highwininseries = 0, ---最大连胜纪录
+}
+
+money = {
+    rid = 0,
+	coin = 10000,  ---金币
+	diamond = 10000, ---钻石
+	maxcoinnum = 10000, ----最大金币数
+}
+
+online = {
+    rid = 0,
+	activetime = 0, 
+	onlinetime = 0, --上线时间
+	roomsvr_id = "",
+	roomsvr_table_id = 0,
+	roomsvr_table_address = -1,
+	gatesvr_ip = "",
+	gatesvr_port = 0,
+	gatesvr_id = "",
+	gatesvr_service_address = -1,
+}
+
+tablerecords = {
+	index_id = 0,
+	table_id = 0,
+	table_create_time = 0,
+	table_create_rid = 0,
+	table_base_coin = 0,
+	rid = 0,
+	record = "",
+}
+
+
+mailinfos = {
+	mail_key = "",
+	rid = 0,
+	create_time = 0,
+	isattach = 0,
+	content = "",
+	reason = 0,
+}

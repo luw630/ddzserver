@@ -1,0 +1,243 @@
+EErrCode = {
+	ERR_SUCCESS            = 0,   --成功
+	ERR_ACCESSDATA_FAILED  = 2,   --访问数据失败
+	ERR_INVALID_REQUEST    = 3,   --无效的请求
+	ERR_VERIFYTOKEN_FAILED = 4,   --验证token失败
+	ERR_NOGATESVR = 5, --当前无可用的服务器
+	ERR_INVALID_PARAMS = 6, --无效的参数
+	ERR_NET_EXCEPTION = 7,  --错误的网络异常
+	ERR_SYSTEM_ERROR = 8,   --系统错误
+	ERR_SERVER_EXPIRED = 9, --服务器过期
+	ERR_DEADING_LASTREQ = 10, --正在处理上一次请求
+	ERR_CREATE_TABLE_FAILED = 11, --创建朋友桌失败
+	ERR_HAD_IN_TABLE = 12, --已经在桌在内
+	ERR_HAD_IN_SEAT = 13, --已经在座位上
+	ERR_TABLE_FULL = 14, --桌子已经满了
+	ERR_NO_EMPTY_SEAT = 15, --桌子已经没有空座位
+	ERR_HAD_STANDUP = 16, --已经站起来了
+	ERR_NOT_INTABLE = 17, --玩家不在座位上
+	ERR_CANNOT_MOVE = 18, --此位置不能落子
+	ERR_NOTENOUGH_COIN = 19, --没有足够的金币
+	ERR_INVALID_CREATETABLEID = 20, --无效的桌号
+	ERR_INVALID_ROOMTYPE = 21, --无效的场次类型
+	ERR_INVALID_GAMETYPE = 22, --无效的游戏类型
+	ERR_NO_VALID_TABLE = 23,   --当前无可用的房间
+	ERR_TOO_MOUCH_COIN = 24,   --当前金币太多
+	ERR_INVALID_CARDTYPE =25,  --无效的牌型
+	ERR_NOT_NO_PLAYER = 26, -- 座位不是没有玩家的状态
+	ERR_PLAYER_IN_GAME = 27, --- 玩家正在游戏中
+	ERR_INVALID_GOODID = 28, --无效的商品id
+	ERR_GENERATE_ORDER_FAILED = 29,  --生成订单失败
+	ERR_SAVE_ORDER_FAILED = 30,      --保存订单失败
+	ERR_IOS_CHECK_FAILED = 31,       --ios支付验单失败
+	ERR_INVALID_GOOD = 32, 			 --无效的商品
+}
+
+--agent的状态
+EGateAgentState = {
+	GATE_AGENTSTATE_UNKNOW = 0,    --初始状态
+	GATE_AGENTSTATE_LOGINING = 1,  --正在登陆
+	GATE_AGENTSTATE_LOGINED = 2,   --登陆成功
+	GATE_AGENTSTATE_LOGOUTING = 3, --正在登出
+	GATE_AGENTSTATE_LOGOUTED = 4,  --退出成功
+}
+--bool的枚举值定义
+EBOOL = {
+	FALSE = 0,
+	TRUE = 1,
+} 
+--桌子的状态
+ETableState = {
+	TABLE_STATE_UNKNOW = 0,
+	TABLE_STATE_GAME_START = 1,        --游戏开始状态
+	TABLE_STATE_WAIT_PLAYER_SITDOWN = 2, --等待玩家坐下
+	TABLE_STATE_WAIT_ALL_READY = 3,			--等待所有玩家准备
+	TABLE_STATE_ONE_GAME_START = 4,    --一局游戏开始
+	TABLE_STATE_WAIT_START_COUNT_DOWN = 5,  --等待开始倒计时
+	TABLE_STATE_WAIT_PLAYER_MINGPAI = 6,    --等待明牌
+	TABLE_STATE_WAIT_PLAYER_JDZ = 7,        --等待叫地主
+	TABLE_STATE_PLAYER_JDZ = 8, --- 叫地主
+	TABLE_STATE_WAIT_PLAYER_CHUPAI = 9,     --等待出牌
+	TABLE_STATE_CONTINUE = 10,
+	TABLE_STATE_WAIT_ONE_GAME_REAL_END = 11, --等待一局游戏真正结束
+	TABLE_STATE_ONE_GAME_END = 12,      --一局游戏结束
+	TABLE_STATE_ONE_GAME_END_AFTER = 13, ----展示出牌牌型动画
+	TABLE_STATE_ONE_GAME_REAL_END = 14, --一局游戏真正结束
+	TABLE_STATE_GAME_END = 15,  	    --游戏结束
+	TABLE_STATE_WAIT_COUNT_DOWN = 16,   --开始倒计时
+	TABLE_STATE_WAIT_CLIENT_ACTION = 17, --等待客户端操作
+}
+
+--座位状态
+ESeatState = {
+	SEAT_STATE_UNKNOW = 0,
+	SEAT_STATE_NO_PLAYER = 1,  --没有玩家
+	SEAT_STATE_WAIT_READY = 2, --等待准备
+	SEAT_STATE_WAIT_START = 3, --等待开局
+	SEAT_STATE_PLAYING  = 4,   --正在游戏中
+	SEAT_STATE_CHECK = 5,      --过牌
+	SEAT_STATE_CHUPAI = 6,     --出牌
+	SEAT_STATE_FOLLOW_CHUPAI = 7, --跟牌
+	SEAT_STATE_TAOPAO = 8,     --逃跑
+	SEAT_STATE_JDZ = 9,		---叫地主
+	SEAT_STATE_QIANGDZ = 10, --抢地主
+	SEAT_STATE_NOT_JDZ = 11, --不叫地主
+	SEAT_STATE_NOT_QIANGDZ = 12, --不抢地主
+	SEAT_STATE_TUOGUAN = 13, ---托管状态
+	SEAT_STATE_WAIT_NOTICE = 14, ---等待通知
+}
+
+--玩家操作类型
+EActionType = {
+	ACTION_TYPE_UNKNOW = 0,
+	ACTION_TYPE_MINGPAI = 1,    --明牌
+	ACTION_TYPE_JIAODIZHU = 2,  --叫地主
+	ACTION_TYPE_QIANGDIZHU = 3, --抢地主
+	ACTION_TYPE_CHUPAI = 4,    --出牌
+	ACTION_TYPE_FOLLOW_CHUPAI = 5, --跟牌
+	ACTION_TYPE_CHECK = 6,   --让牌 
+	ACTION_TYPE_TAOPAO = 7,  --逃跑
+	ACTION_TYPE_TIMEOUT_JDZ = 8,    --叫地主超时
+	ACTION_TYPE_TIMEOUT_CHUPAI = 9, --出牌超时
+	ACTION_TYPE_TIMEOUT_FOLLOW_CHUPAI = 10, --跟牌超时
+	ACTION_TYPE_BUJIAO_DIZHU = 11,	-- 不叫地主
+	ACTION_TYPE_BUQIANGDIZHU = 12, -- 不抢地主
+	ACTION_TYPE_TIMEOUT_QIANGDIZHU = 13, --抢地主超时
+	ACTION_TYPE_REQUEST_TUOGUAN = 14,	---玩家请求托管
+	ACTION_TYPE_CANCEL_TUOGUAN = 15,    ---玩家取消托管
+}
+
+--房间类型
+ERoomType = {
+	ROOM_TYPE_UNKNOW = 0,
+	ROOM_TYPE_COMMON = 1, --经典场
+	ROOM_TYPE_FRIEND_COMMON = 2, --自己积分场
+}
+
+--游戏类型
+EGameType = {
+	GAME_TYPE_UNKNOW = 0,
+	GAME_TYPE_DDZ_NEW_PLAYER = 1,	---新手场
+	GAME_TYPE_DDZ_PRIMARY = 2,	    ---初级场
+	GAME_TYPE_DDZ_INTERMEDIATE = 3,	---中级场
+	GAME_TYPE_DDZ_ADVANCED = 4,	    ---高级场
+	GAME_TYPE_DDZ_QUICK = 5,	    ---快速场
+}
+
+--发行平台
+EPublishPlatform = {
+	PUBLISH_PLATFORM_JUZONG = 1, --聚众
+	PUBLISH_PLATFORM_COMMON = 100, --通用平台
+}
+--发行渠道
+EPublishChannel = {
+	PUBLISH_CHANNEL_JUZONG_IOS = 1, --聚众ios官方渠道
+	PUBLISH_CHANNEL_JUZONG_ANDROID = 2, --聚众android官方渠道
+	PUBLISH_CHANNEL_COMMON = 1000,  --通用渠道
+}
+
+--支付类型
+EPayType = {
+	PAY_TYPE_IOS=1, --IOS支付
+	PAY_TYPE_WECHAT = 2, --微信支付
+	PAY_TYPE_ZHIFUBAO = 3, --支付宝
+}
+
+
+--玩家站起原因
+EStandupReason = {
+	STANDUP_REASON_UNKNOW = 0,
+	STANDUP_REASON_ONSTANDUP = 1, --玩家主动站起
+	STANDUP_REASON_READYTIMEOUT_STANDUP = 2, --准备超时站起
+	STANDUP_REASON_DELETE_TABLE = 3, --桌子被删除,玩家站起
+	STANDUP_REASON_HAVE_NOT_ENOUGH_COIN = 4, ---金币不足
+}
+
+EWinResult = {
+	WIN_RESULT_UNKNOW = 0,
+	WIN_RESULT_WIN = 1,
+	WIN_RESULT_LOSE = 2,
+}
+---斗地主玩家牌局身份标识
+EPlayerIDType = {
+	DDZ_PLAYER_ID_TYPE_UNKNOW = 0,	---不明标识
+	DDZ_PLAYER_ID_TYPE_DIZHU = 1,  ---身份地主
+	DDZ_PLAYER_ID_TYPE_FARMER = 2, ---身份农民
+}
+--斗地主牌类型
+ECardType = {
+	DDZ_CARD_TYPE_UNKNOWN 	= 0,
+	DDZ_CARD_TYPE_SINGLE 	= 1, ---单张
+	DDZ_CARD_TYPE_PAIR	 	= 2, ---对子
+	DDZ_CARD_TYPE_THREE 	= 3, ---三张
+	DDZ_CARD_TYPE_BOMB		= 4, ---炸弹
+	DDZ_CARD_TYPE_ROCKET	= 5, ---火箭(王炸)
+	DDZ_CARD_TYPE_ONE_STRAIGHT = 6, ---单顺
+	DDZ_CARD_TYPE_TWO_STRAIGHT = 7, ---连对
+	DDZ_CARD_TYPE_THREE_STRAIGHT = 8, ---三顺
+	DDZ_CARD_TYPE_THREE_ONE		= 9, ---三带一
+	DDZ_CARD_TYPE_THREE_PAIR = 10,   ---三带二
+	DDZ_CARD_TYPE_THREE_WING_ONE = 11,  ---飞机带翅膀(单)
+	DDZ_CARD_TYPE_THREE_WING_PAIR = 12, --- 飞机带翅膀(双)
+	DDZ_CARD_TYPE_FOUR_TWO_ONE = 13,  --- 四带二张
+	DDZ_CARD_TYPE_FOUR_TWO_PAIR = 14, --- 四代两对
+	DDZ_CARD_TYPE_SOFTBOMB    = 15,   --- 软炸弹
+	DDZ_CARD_TYPE_TIANBOMB    = 16    --- 天炸弹
+}
+
+---游戏中的货币类型
+ECurrencyType = {
+	CURRENCY_TYPE_UNKNOWN = 0,
+	CURRENCY_TYPE_COIN = 1,
+	CURRENCY_TYPE_DIAMOND = 2,
+}
+
+---货币变化的原因
+EReasonChangeCurrency = {
+	CHANGE_CURRENCY_UNKNOWN = 0,
+	CHANGE_CURRENCY_SYSTEM_GAME = 1, --系统桌结算
+	CHANGE_CURRENCY_FRIEND_TABLE =2, --朋友桌结算
+	CHANGE_CURRENCY_RECHARGE = 3, --商城充值
+	CHANGE_CURRENCY_GETITEM_FROM_MAIL = 4, ---领取邮件附件
+}
+
+---倍数配置
+ECommonTimesType = {
+	COMMONTIMES_DEFAULT = 15
+}
+
+---准备时间配置
+EReadyTimesType = {
+	COMMON_READYTIMES_DEFAULT = 60
+}
+
+----托管后动作延时，方便客户端展示特效
+ETuoguanDelayTime = {
+	TUOGUAN_DELAY_TIME = 1
+}
+
+EPushcardsType = {
+	COMMOM_LAST_TIMES = 2  ---最大重复发牌次数
+}
+
+
+ESendMailReasonType = {
+	COMMON_TYPE_TESTING = 1, ---测试邮件
+	COMMON_TYPE_MOVING = 2, ---活动邮件
+}
+
+EDelayTimeCardType = {
+	COMMON_CARDTYPE = 5,
+	COMMON_CHUNTIAN = 500,
+	DDZ_CARD_TYPE_BOMB = 120,
+	DDZ_CARD_TYPE_ROCKET = 120,
+	DDZ_CARD_TYPE_THREE_STRAIGHT = 220, ---三顺
+	DDZ_CARD_TYPE_THREE_WING_ONE = 220,  ---飞机带翅膀(单)
+	DDZ_CARD_TYPE_THREE_WING_PAIR = 220, --- 飞机带翅膀(双)
+	DDZ_CARD_TYPE_FOUR_TWO_ONE = 220,  --- 四带二张
+	DDZ_CARD_TYPE_FOUR_TWO_PAIR = 220, --- 四代两对
+	DDZ_CARD_TYPE_ONE_STRAIGHT = 220, ---单顺
+	DDZ_CARD_TYPE_TWO_STRAIGHT = 220, ---连对
+}
+
+

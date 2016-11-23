@@ -1,0 +1,23 @@
+--ƽ̨����
+platforms={
+	[1]="juzhong",  --ƽ̨��1��ʾ���ڻ���
+	[100]="common", --ͨ��
+}
+
+common={
+	[1000]={
+		roomtablecfg = {
+			file="../config/business/roomtablescfg.lua",
+		},
+		globalvarcfg = {
+		    file="../config/business/globalvarcfg.lua",
+		},
+		mailcfg = {
+			file="../config/business/mailcfg",
+		},
+	}
+}
+
+tables = {
+	
+}
